@@ -1,0 +1,97 @@
+<script>
+    var TS = <go>.TS</go>;
+    var Hash = "<go>.Hash</go>";
+</script>
+<div class="panel panel-warning" ng-controller="ctrl.ts">
+    <div class="panel-heading">尽情的玩耍吧，骚年......
+        <a href="/tskl" class="other">去远程调试</a>
+        <span class="user-info"><span><go>.User.Name</go></span><a href="/login/out">退出</a></span>
+    </div>
+    <div class="panel-body">
+        <div class="highlight">
+            <div class="flex">
+                <div class="flex-one"><div class="input-group"><span class="input-group-addon">PHP：</span><input class="form-control" readonly style="background:#fff;" value="<go>.PHPUrl</go>"></div></div>
+                <div style="margin-left:5px;"><button class="btn btn-danger" ng-click="vm.option('php')">使用方式</button></div>
+            </div>
+<pre ng-if="vm.phpDemo==1" ng-cloak>
+    &lt;?php
+    //先使用如下方式引入TS的PHP类
+    @eval(file_get_contents('<go>.PHPUrl</go>')) || die('云TS失败！');
+    //如果环境禁用eval，可以换成include_once方式，不过也需要环境开启了allow_url_include，调用如下
+    //@include_once('<go>.PHPUrl</go>&include=1');
+
+    //假设有个数组变量$info
+    //$info = array(
+    //    'name' => 'tangseng',
+    //    'pass' => 'xxx'
+    //);
+    //可以如下调用来远程打印$info
+    TS::T($info);
+
+    //也可以一次输入多个值
+    TS::T($info1, $info2, $info3, ...);
+
+    //然后在之后程序的运行中追加数据
+    TS::T($info4);
+
+    //单纯的调用TS::T只是将想要打印的数据存放到缓存中了，需要如下调用才能真正的发送到云
+    TS::S();
+
+    //另外还可以合并操作，使用如下
+    TS::T_S($info, $info1, $info2);
+    ?&gt;
+</pre>
+
+            <div class="flex" style="margin-top:5px;">
+                <div class="flex-one"><div class="input-group"><span class="input-group-addon">&nbsp;&nbsp;&nbsp;JS：</span><input class="form-control" readonly style="background:#fff;" value="<go>.JSUrl</go>"></div></div>
+                <div style="margin-left:5px;"><button class="btn btn-danger" ng-click="vm.option('js')">使用方式</button></div>
+            </div>
+<pre ng-if="vm.jsDemo==1" ng-cloak>
+    //先使用如下方式引入TS的JS类
+    &lt;script src="<go>.JSUrl</go>"&gt;&lt;/script&gt;
+
+    //假设有个对象变量info
+    //var info = {
+    //    'name' : 'tangseng',
+    //    'pass' : 'xxx'
+    //};
+    //可以如下调用来远程打印info
+    TS.T(info);
+
+    //也可以一次输入多个值
+    TS.T(info1, info2, info3, ...);
+
+    //然后在之后程序的运行中追加数据
+    TS.T(info4);
+
+    //单纯的调用TS::T只是将想要打印的数据存放到缓存中了，需要如下调用才能真正的发送到云
+    TS.S();
+
+    //另外还可以合并操作，使用如下
+    TS.T_S(info, info1, info2);
+</pre>
+
+        </div>
+        <div class="flex ts-box" my-jsonview>
+            <div class="flex-one ng-cloak" ng-repeat="(i, ts) in vm.tss" time="{{ts.time}}">
+                <table>
+                    <tr>
+                        <td>时间：{{ts.tstime}}</td>
+                        <td style="width:150px;">IP：{{ts.ip}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="position:relative;">
+                            <span ng-if="ts.type=='php'" class="ts-more btn btn-success" ng-click="vm.more(i)">{{vm.state[i].n}}</span>
+                            <div ng-repeat="da in ts.data">
+                                <div ng-if="ts.type=='php'&&vm.state[i].v==0" class="ts-s json-view">{{da.realInfo}}</div>
+                                <div ng-if="vm.state[i].v==1||(ts.type=='js'&&vm.state[i].v==0)" class="ts-m json-view">{{da.info}}</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <a href="/ts/more" ng-if="vm.tss.length>=2" class="btn btn-block btn-warning ng-cloak" style="margin:15px auto 0;width:300px;">更多</a>
+    </div>
+</div>

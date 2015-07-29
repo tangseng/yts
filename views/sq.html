@@ -1,0 +1,55 @@
+<script>
+    var Sqs = <go>.Sqs</go>;
+</script>
+<div class="panel panel-warning main-box" ng-controller="ctrl.sq">
+    <div class="panel-heading">Come on...
+        <span style="float:right;">（想要快速通过申请，可以打听我的支付宝账号，嗯...你懂的！！！）</span>
+    </div>
+    <div class="panel-body">
+        <div class="flex">
+            <div class="sq-list">
+                <table>
+                    <tr>
+                        <th>申请人</th>
+                        <th>状态</th>
+                    </tr>
+                    <tr ng-repeat="sq in vm.sqs" class="ng-cloak">
+                        <td>{{sq.name}}</td>
+                        <td>{{sq.statusString}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="flex-one">
+                <div class="sq-form">
+                    <div class="flex flex-column">
+                        <div class="flex-one">
+                            <div class="input-group">
+                                <span class="input-group-addon">姓名</span>
+                                <input type="text" class="form-control" ng-model="vm.ccsq.name">
+                            </div>
+                            <span class="sq-tip">*中文，用自己的姓名吧</span>
+                        </div>
+                        <div class="flex-one">
+                            <div class="input-group">
+                                <span class="input-group-addon">登录</span>
+                                <input type="text" class="form-control" ng-model="vm.ccsq.loginName">
+                            </div>
+                            <span class="sq-tip">*英文 或 英文开头+字母，用姓名拼音吧</span>
+                        </div>
+                        <div class="flex-one">
+                            <div class="input-group">
+                                <span class="input-group-addon">密码</span>
+                                <input type="password" class="form-control" ng-model="vm.ccsq.loginPass">
+                            </div>
+                            <span class="sq-tip">简单就好</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn-block" ng-if="vm.num!=-1" my-tip="vm.ajaxing" ng-click="vm.doSQ()">申请</button>
+                        <a href="/login" style="display:block;width:100px;margin:10px auto;text-align:center;">去登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

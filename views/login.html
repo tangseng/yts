@@ -1,0 +1,9 @@
+<div class="container" style="width: 300px;">
+    <form method="post" onsubmit="return false;" class="form-login form-horizontal" ng-controller="ctrl.login">
+        <h3 style="text-align:center;">云调试（唐僧制作）</h3>
+        <input style="margin:15px 0;" type="text" class="form-control" placeholder="登录名" ng-model="vm.cclogin.name">
+        <input style="margin:15px 0;" type="password" class="form-control" placeholder="密码" ng-model="vm.cclogin.password">
+        <button type="submit" class="btn btn-info btn-block" my-tip="vm.ajaxing" ng-click="vm.login()">登录</button>
+        <a href="/sq" style="display:block;width:100px;margin:10px auto;text-align:center;">去申请</a>
+    </form>
+</div>

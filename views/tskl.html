@@ -1,0 +1,63 @@
+<script>
+    var TSKL = <go>.TSKL</go>;
+    var STEP = <go>.STEP</go>;
+</script>
+<div class="panel panel-success" ng-controller="ctrl.tskl">
+    <div class="panel-heading">尽情的玩耍吧，骚年......
+        <a href="/ts" class="other">去日志调试</a>
+        <span class="user-info"><span><go>.User.Name</go></span><a href="/login/out">退出</a></span>
+    </div>
+    <div class="panel-body">
+        <div class="highlight">
+            <div class="flex" style="margin-top:5px;">
+                <div class="flex-one"><div class="input-group"><span class="input-group-addon">&nbsp;&nbsp;&nbsp;JS：</span><input class="form-control" readonly style="background:#fff;" value="<go>.JSUrl</go>"></div></div>
+                <div style="margin-left:5px;"><button class="btn btn-danger" ng-click="vm.option('js')">使用方式</button></div>
+            </div>
+<pre ng-if="vm.jsDemo==1" ng-cloak>
+    //使用如下方式引入TS的JS类
+    &lt;script src="<go>.JSUrl</go>"&gt;&lt;/script&gt;
+
+    //然后在云端输入获取变量信息的JS方法进行远程调用
+</pre>
+        </div>
+
+        <div class="flex kl-box">
+            <div class="flex-one">
+                <div class="input-group">
+                    <textarea class="form-control" ng-model="vm.tskl.send"></textarea>
+                    <div class="input-group-addon">
+                        <div class="kl-option">
+                            <button class="btn btn-default" ng-cloak ng-if="vm.step>0" disabled>{{vm.step}}秒后继续</button>
+                            <button class="btn btn-success" ng-cloak ng-if="vm.step==0" ng-click="vm.send()">Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kl-back-box">
+                <div class="flex flex-column" my-jsonview>
+                    <pre ng-if="(vm.tskl.berr||'').length>0" class="ng-cloak kl-err" style="margin-bottom:10px;">{{vm.tskl.berr}}</pre>
+                    <div class="flex-one tskl-back ng-cloak">
+                        <div class="tskl-zcbtn" ng-if="vm.tskl.back">
+                            <button class="btn btn-warning btn-sm" ng-click="vm.jsonbtn()">JSON</button>
+                            <button class="btn btn-warning btn-sm" ng-click="vm.zcbtn()">暂存</button>
+                        </div>
+                        <pre>{{vm.tskl.back}}</pre>
+                    </div>
+                    <div class="flex-one tskl-back-json json-view ng-cloak" ng-if="vm.backjson">
+                        {{vm.tskl.back}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tskl-zc ng-cloak" ng-if="vm.zcs.length>0">
+        <h4>下面是暂存的结果：</h4>
+        <div class="flex">
+            <div class="flex-one" style="width:33%;" ng-repeat="(i, zc) in vm.zcs">
+                <button class="btn btn-sm btn-warning" ng-click="vm.zcrm(i)">删除</button>
+                <pre>{{zc.back}}</pre>
+            </div>
+        </div>
+    </div>
+</div>

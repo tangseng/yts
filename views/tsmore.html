@@ -1,0 +1,27 @@
+<script>
+    var TS = <go>.TS</go>;
+</script>
+<div class="panel panel-warning" ng-controller="ctrl.tsmore">
+    <div class="panel-heading"><a href="/ts">返回</a></div>
+    <div class="panel-body">
+        <div class="flex flex-row-wrap ts-box" my-jsonview>
+            <div class="flex-one ng-cloak" ng-repeat="(i, ts) in vm.tss" time="{{ts.time}}" style="min-width:500px;">
+                <table>
+                    <tr>
+                        <td>时间：{{ts.tstime}}</td>
+                        <td style="width:150px;">IP：{{ts.ip}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="position:relative;">
+                            <span ng-if="ts.type=='php'" class="ts-more btn btn-success" ng-click="vm.more(i)">{{vm.state[i].n}}</span>
+                            <div ng-repeat="da in ts.data">
+                                <div ng-if="ts.type=='php'&&vm.state[i].v==0" class="ts-s json-view">{{da.realInfo}}</div>
+                                <div ng-if="vm.state[i].v==1||(ts.type=='js'&&vm.state[i].v==0)" class="ts-m json-view">{{da.info}}</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

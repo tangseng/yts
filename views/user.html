@@ -1,0 +1,43 @@
+<script>
+    var Persons = <go>.Persons</go>;
+</script>
+<div class="panel panel-warning main-box" ng-controller="ctrl.person">
+    <div class="panel-heading">嗯...</div>
+    <div class="panel-body">
+        <div class="flex">
+            <div class="person-input flex-one">
+                <div class="input-group">
+                    <span class="input-group-addon">姓名</span>
+                    <input type="text" class="form-control" ng-model="vm.ccperson.name">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">登录</span>
+                    <input type="text" class="form-control" ng-model="vm.ccperson.loginName">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">密码</span>
+                    <input type="password" class="form-control" ng-model="vm.ccperson.loginPass">
+                </div>
+            </div>
+            <div style="width:100px;" ng-cloak>
+                <button ng-if="vm.ccperson.edit==0" class="btn btn-default btn-block person-btn" my-tip="vm.ajaxing" ng-click="vm.doAdd()">新增</button>
+                <button ng-if="vm.ccperson.edit>0" class="btn btn-default btn-block person-btn" my-tip="vm.ajaxing" ng-click="vm.doUpdate()">更新</button>
+            </div>
+        </div>
+    </div>
+
+    <table  class="table" ng-cloak>
+        <tr>
+            <th>姓名</th>
+            <th>登录名</th>
+            <th>密码</th>
+            <th style="width:100px">操作</th>
+        </tr>
+        <tr ng-repeat="person in vm.persons">
+            <td>{{person.name}}</td>
+            <td>{{person.loginName}}</td>
+            <td><span data-pass="{{person.loginPass}}">******</span></td>
+            <td><button class="btn btn-info btn-xs" ng-click="vm.update(person.loginName)">编辑</button><button class="btn btn-danger btn-xs" ng-click="vm.doDelete(person.loginName)" style="margin-left:8px;">删除</button></td>
+        </tr>
+    </table>
+</div>
